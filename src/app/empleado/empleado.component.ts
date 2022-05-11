@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmpleadoBDDService } from '../empleado-bdd.service';
 import { Empleado } from './empleado.model';
 
 @Component({
@@ -12,24 +13,20 @@ export class EmpleadoComponent implements OnInit {
   tbApellido:string="";
   tbCargo:string="";
   tbSalario:number=0;
+  empleados:Empleado[]=[];
 
-  empleados:Empleado[]=[
-    new Empleado("Juan","Pérez","Presidente",3500),
-    new Empleado("María","López","Directora",2300),
-    new Empleado("Andrés","Rodríguez","Gerente",1800),
-    new Empleado("Fulano","Detal","Administrativo",1000),
-    new Empleado("Fulana","Decual","Secretaria",800)
-  ];
+  constructor(private empleadoService:EmpleadoBDDService) { 
+    this.empleados=empleadoService.readEmpleados();
+  }
 
   agregar():void
   {
-    this.empleados.push(new Empleado(this.tbNombre,this.tbApellido,this.tbCargo,this.tbSalario))
+    this.empleadoService.createEmpleado(new Empleado(this.tbNombre,this.tbApellido,this.tbCargo,this.tbSalario));
     this.tbNombre="";
     this.tbApellido="";
     this.tbCargo="";
     this.tbSalario=0;
   }
-  constructor() { }
 
   ngOnInit(): void {
   }
