@@ -1,0 +1,56 @@
+<div class="container">
+    <form class="form-group row">
+        <div>
+            <label for="nombre" style="margin-right:5px ;">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Nombre"  [(ngModel)]="tbNombre">
+        </div>
+ 
+        <div>
+            <label for="apellido" style="margin-right:5px ;">Apellido:</label>
+            <input type="text" id="apellido" name="apellido" placeholder="Apellido" [(ngModel)]="tbApellido">
+        </div>
+
+        <div>
+            <label for="cargo" style="margin-right:19px ;">Cargo:</label>
+            <input type="text" id="cargo" name="cargo" placeholder="Cargo" [(ngModel)]="tbCargo">
+        </div>
+
+        <div>
+            <label for="salario" style="margin-right:15px ;">Salario:</label>
+            <input type="text" id="salario" name="salario" placeholder="Salario" [(ngModel)]="tbSalario">
+        </div>
+
+        <div>
+            <input type="submit" class="btn btn-primary" style="margin-top: 10px; margin-left: 145px;" value="Agregar" (click)="agregar()">
+        </div>
+
+    </form>      
+</div>
+<br/><br/>
+
+<div class="container">
+    <div class="row">
+        <h1 style="text-align:center ;">Lista de Empleados</h1>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Nombre</td>
+                    <td>Apellido</td>
+                    <td>Cargo</td>
+                    <td>Salario</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let empleado of empleados; let i=index">
+                    <td>{{i+1}}</td>
+                    <td>{{empleado.nombre}}</td>
+                    <td>{{empleado.apellido}}</td>
+                    <td>{{empleado.cargo}}</td>
+                    <td>{{empleado.salario}}</td>
+                </tr>
+            </tbody>
+        </table>      
+    </div>
+</div>
