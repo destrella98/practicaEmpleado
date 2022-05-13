@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DataService } from './data.service';
 import { Empleado } from './empleado/empleado.model';
 
 @Injectable({
@@ -6,21 +7,42 @@ import { Empleado } from './empleado/empleado.model';
 })
 export class EmpleadoBDDService {
 
-  private empleados:Empleado[]=[
-    new Empleado("Juan","Pérez","Presidente",3500),
-    new Empleado("María","López","Directora",2300),
-    new Empleado("Andrés","Rodríguez","Gerente",1800),
-    new Empleado("Fulano","Detal","Administrativo",1000),
-    new Empleado("Fulana","Decual","Secretaria",800)
-  ];
+  private empleados:Empleado[]=[];
   
-  constructor() { }
+  constructor(private dataService:DataService) {     
+  }
 
-  readEmpleados():Empleado[]{
+  ngOnInit():void{
+  }
+
+  setEmpleados(empleados:Empleado[]):void
+  {
+    this.empleados=empleados;
+  }
+
+  getEmpleados():Empleado[]{
+    return this.empleados;
+  }
+
+
+  async readEmpleados(){
+
+    this.empleados=<Empleado[]>(await this.dataService.readEmpleados());
     return this.empleados;
   }
 
   createEmpleado(empleado:Empleado):void{
-    this.empleados.push(new Empleado(empleado.nombre,empleado.apellido,empleado.cargo,empleado.salario));
+    this.empleados.push(empleado);
+    this.dataService.createEmpleado(this.empleados);
+  }
+
+  async updateEmpleado(id:number,empleado:Empleado){
+    this.empleados[id]=empleado;
+    this.dataService.updateEmpleado(id,empleado);
+  }
+
+  deleteEmpleado(id:number){
+    this.empleados.splice(id,1);
+    this.dataService.deleteEmpleado(id);
   }
 }

@@ -40,6 +40,8 @@
                     <td>Apellido</td>
                     <td>Cargo</td>
                     <td>Salario</td>
+                    <td>Editar</td>
+                    <td>Eliminar</td>
                 </tr>
             </thead>
             <tbody>
@@ -49,6 +51,8 @@
                     <td>{{empleado.apellido}}</td>
                     <td>{{empleado.cargo}}</td>
                     <td>{{empleado.salario}}</td>
+                    <td><input type="button" value="Editar" (click)="editar(i,empleado)" class="btn btn-primary"></td>
+                    <td><input type="button" value="Eliminar" (click)="eliminar(i)" class="btn btn-primary"></td>
                 </tr>
             </tbody>
         </table>      
